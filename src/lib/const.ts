@@ -1,0 +1,1 @@
+export let appName: string = "Max's Trivia Engine"
