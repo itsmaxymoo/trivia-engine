@@ -1,5 +1,11 @@
 <script>
-	import Header from "./Header.svelte";
+	import PageHeader from "../lib/PageHeader.svelte";
+	import StdContainer from "../lib/StdContainer.svelte";
+	import TopicList from "./TopicList.svelte";
 </script>
 
-<Header />
+<PageHeader />
+
+<StdContainer>
+	<TopicList />
+</StdContainer>
