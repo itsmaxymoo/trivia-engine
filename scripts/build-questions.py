@@ -33,7 +33,7 @@ found_csv = glob.glob(IN_DIR + "/*.csv")
 
 # --- For topics list file
 
-topic_list = []
+topic_list = {}
 
 
 
@@ -72,7 +72,7 @@ class Question:
 for csv_path in found_csv:
 	stripped_name = csv_path.lstrip(IN_DIR + "/").rstrip(".csv")
 	# Append to topics list
-	topic_list.append(stripped_name)
+	topic_list[stripped_name] = 0
 
 	# Create question bank
 	bank = []
@@ -85,6 +85,7 @@ for csv_path in found_csv:
 			question: Question = Question(row["Question"], row["Answer"], wrong_answers)
 
 			bank.append(question.to_dict())
+			topic_list[stripped_name] += 1
 
 		csv_file.close()
 	
