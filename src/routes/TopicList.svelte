@@ -58,8 +58,8 @@
 							/>
 							{topic}
 						</td>
-						<td>
-							{topicDict[topic]}
+						<td class="has-text-right">
+							({topicDict[topic]})
 						</td>
 					</tr>
 				{/each}
