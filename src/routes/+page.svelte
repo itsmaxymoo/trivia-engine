@@ -1,8 +1,9 @@
 <script lang="ts">
+    import { goto } from "$app/navigation";
 	import { questionPath } from "$lib/const";
 	import { GameManager, type Question } from "$lib/game";
 	import PageHeader from "$lib/PageHeader.svelte";
-	import { gameManager } from "$lib/state";
+	import { gameManagerStore } from "$lib/state";
 	import StdContainer from "$lib/StdContainer.svelte";
 	import StartButton from "./StartButton.svelte";
 	import TopicList from "./TopicList.svelte";
@@ -35,12 +36,14 @@
 					++completedRequests;
 
 					if (completedRequests >= selectedTopics.length) {
-						gameManager.set(
+						gameManagerStore.set(
 							new GameManager(
 								{ totalQuestions: 10 },
 								categorizedQuestionBank
 							)
 						);
+
+						goto("/play");
 					}
 				})
 			);
