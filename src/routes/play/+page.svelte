@@ -17,9 +17,11 @@
 	}
 
 	currentQuestion = gameManager!.getQuestion();
+
+	$: qIndex = "Question " + (currentQuestion.qIndex + 1);
 </script>
 
-<PageHeader text="Playing!" />
+<PageHeader bind:text={qIndex} />
 
 <StdContainer>
 	{currentQuestion.question.text}
