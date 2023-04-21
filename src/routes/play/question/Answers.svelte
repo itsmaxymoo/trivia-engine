@@ -3,7 +3,13 @@
 </script>
 
 <div class="box has-text-centered">
-	{#each answers as answer}
-		<button class="button is-medium is-info is-outlined">{answer}</button>
-	{/each}
+	<table class="table is-fullwidth is-hoverable is-striped">
+		<tbody>
+			{#each answers as answer}
+				<tr>
+					<td class="has-text-left">{answer}</td>
+				</tr>
+			{/each}
+		</tbody>
+	</table>
 </div>
