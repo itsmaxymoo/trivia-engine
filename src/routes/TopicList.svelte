@@ -45,9 +45,9 @@
 						on:click={() => {
 							toggleTopic(topic);
 						}}
-						class={selectedTopics.includes(topic)
-							? "is-selected"
-							: ""}
+						class="hover-cursor {selectedTopics.includes(topic)
+							? 'is-selected'
+							: ''}"
 					>
 						<td>
 							<input
@@ -67,3 +67,9 @@
 		</table>
 	{/await}
 </div>
+
+<style>
+	.hover-cursor {
+		cursor: pointer;
+	}
+</style>

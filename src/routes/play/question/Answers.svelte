@@ -6,10 +6,16 @@
 	<table class="table is-fullwidth is-hoverable is-striped">
 		<tbody>
 			{#each answers as answer}
-				<tr>
+				<tr class="hover-cursor">
 					<td class="has-text-left">{answer}</td>
 				</tr>
 			{/each}
 		</tbody>
 	</table>
 </div>
+
+<style>
+	.hover-cursor {
+		cursor: pointer;
+	}
+</style>
