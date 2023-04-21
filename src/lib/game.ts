@@ -35,6 +35,7 @@ export class GameManager {
 		this._questionIndex = 0;
 
 		this._questionQueue = this.constructQuestionQueue(categorizedQuestionBank);
+		console.log(this);
 	}
 
 	public get settings() { return this._settings; }

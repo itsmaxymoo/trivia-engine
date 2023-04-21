@@ -4,6 +4,7 @@
 	import StdContainer from "$lib/StdContainer.svelte";
 	import type { GameManager, QuestionUI } from "$lib/game";
 	import { gameManagerStore } from "$lib/state";
+	import Question from "./question/Question.svelte";
 
 	let gameManager: GameManager | undefined;
 	let currentQuestion: QuestionUI;
@@ -24,5 +25,5 @@
 <PageHeader bind:text={qIndex} />
 
 <StdContainer>
-	{currentQuestion.question.text}
+	<Question bind:question={currentQuestion.question} />
 </StdContainer>

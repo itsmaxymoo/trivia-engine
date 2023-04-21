@@ -45,6 +45,7 @@ class Question:
 	false_answers = []
 
 	def __init__(self, question: str, answer: str, wrong_answers: list):
+		self.false_answers = []
 		if len(question) * len(answer) < 1:
 			raise ValueError("question and answer length must be >0")
 		
