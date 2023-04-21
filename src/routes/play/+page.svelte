@@ -12,11 +12,11 @@
 		gameManager = value;
 	});
 
-	if (gameManager) {
-		currentQuestion = gameManager.getQuestion();
-	} else {
+	if (!gameManager) {
 		goto("/");
 	}
+
+	currentQuestion = gameManager!.getQuestion();
 </script>
 
 <PageHeader text="Playing!" />
