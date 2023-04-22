@@ -56,8 +56,15 @@ export class GameManager {
 		return this.getQuestion();
 	}
 
-	public answerQuestion(correctAnswer: boolean) {
-		this._questionQueue[this._questionIndex].state = correctAnswer ? QuestionState.TRUE : QuestionState.FALSE;
+	public answerQuestion(selectedAnswers: Array<String>): boolean {
+		if (selectedAnswers[0] == this._questionQueue[this._questionIndex].question.answer) {
+			this._questionQueue[this._questionIndex].state = QuestionState.TRUE;
+			return true;
+		}
+		else {
+			this._questionQueue[this._questionIndex].state = QuestionState.FALSE;
+			return false;
+		}
 	}
 
 	private constructQuestionQueue(categorizedQuestionBank: { [topic: string]: Array<Question> }): Array<QuestionQueueEntry> {
