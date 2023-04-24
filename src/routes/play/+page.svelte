@@ -13,6 +13,7 @@
 	let gameManager: GameManager | undefined;
 	let currentQuestion: QuestionUI;
 	let questionAnswerState: QuestionState = QuestionState.UNANSWERED;
+	let hasNextQuestion: boolean;
 
 	// --- Ensure the game is in a valid state
 	gameManagerStore.subscribe((value) => {
@@ -28,6 +29,10 @@
 
 	// --- set UI components
 	$: qIndex = "Question " + (currentQuestion.qIndex + 1);
+	$: {
+		currentQuestion;
+		hasNextQuestion = gameManager!.hasNextQuestion();
+	};
 
 	// --- handle answer selection
 	function handleAnswersSelected(event: any) {
@@ -40,8 +45,10 @@
 
 	// --- increment question function
 	function nextQuestion() {
-		currentQuestion = gameManager!.getNextQuestion();
-		questionAnswerState = QuestionState.UNANSWERED;
+		if (gameManager!.hasNextQuestion()) {
+			currentQuestion = gameManager!.getNextQuestion();
+			questionAnswerState = QuestionState.UNANSWERED;
+		}
 	}
 </script>
 
@@ -56,9 +63,9 @@
 
 	{#if questionAnswerState != QuestionState.UNANSWERED}
 		<p class="has-text-centered">
-			<button class="button is-link is-outline" on:click={nextQuestion}
-				>Next question ></button
-			>
+			<button class="button is-link is-outline" on:click={nextQuestion}>
+				{hasNextQuestion ? "Next question >" : "See results"}
+			</button>
 		</p>
 	{/if}
 </StdContainer>

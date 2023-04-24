@@ -38,7 +38,7 @@
 					if (completedRequests >= selectedTopics.length) {
 						gameManagerStore.set(
 							new GameManager(
-								{ totalQuestions: 10 },
+								{ totalQuestions: 2 },
 								categorizedQuestionBank
 							)
 						);
