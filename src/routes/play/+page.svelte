@@ -37,6 +37,12 @@
 			questionAnswerState = QuestionState.FALSE;
 		}
 	}
+
+	// --- increment question function
+	function nextQuestion() {
+		currentQuestion = gameManager!.getNextQuestion();
+		questionAnswerState = QuestionState.UNANSWERED;
+	}
 </script>
 
 <PageHeader bind:text={qIndex} />
@@ -47,4 +53,12 @@
 		bind:questionAnswerState
 		on:answersSelected={handleAnswersSelected}
 	/>
+
+	{#if questionAnswerState != QuestionState.UNANSWERED}
+		<p class="has-text-centered">
+			<button class="button is-link is-outline" on:click={nextQuestion}
+				>Next question ></button
+			>
+		</p>
+	{/if}
 </StdContainer>

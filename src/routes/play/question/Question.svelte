@@ -28,5 +28,5 @@
 {:else if questionAnswerState == QuestionState.TRUE}
 	<Result {question} correct={true} />
 {:else if questionAnswerState == QuestionState.FALSE}
-<Result {question} correct={false} />
+	<Result {question} correct={false} />
 {/if}
