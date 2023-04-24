@@ -44,14 +44,7 @@
 <StdContainer>
 	<Question
 		bind:question={currentQuestion.question}
+		bind:questionAnswerState
 		on:answersSelected={handleAnswersSelected}
 	/>
-	{#if questionAnswerState != QuestionState.UNANSWERED}
-		{#if questionAnswerState == QuestionState.TRUE}
-			true
-		{:else}
-			false
-		{/if}
-		next button
-	{/if}
 </StdContainer>

@@ -1,5 +1,5 @@
 <script lang="ts">
-	import type { Question } from "$lib/game";
+	import { QuestionState, type Question } from "$lib/game";
 	import Answers from "./Answers.svelte";
 	import QuestionText from "./QuestionText.svelte";
 
@@ -8,12 +8,24 @@
 		answer: "NULL",
 		falseAnswers: [],
 	};
+	export let questionAnswerState: QuestionState = QuestionState.UNANSWERED;
 
 	$: shuffledAnswers = [...question.falseAnswers, question.answer].sort(
 		() => Math.random() - 0.5
 	);
+
+	$: {
+		question;
+		questionAnswerState = QuestionState.UNANSWERED;
+	}
 </script>
 
 <QuestionText bind:text={question.text} />
 
 <Answers bind:answers={shuffledAnswers} on:answersSelected />
+
+{#if questionAnswerState == QuestionState.TRUE}
+	true
+{:else if questionAnswerState == QuestionState.FALSE}
+	false
+{/if}
