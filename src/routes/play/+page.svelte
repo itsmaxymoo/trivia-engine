@@ -32,7 +32,7 @@
 	$: {
 		currentQuestion;
 		hasNextQuestion = gameManager!.hasNextQuestion();
-	};
+	}
 
 	// --- handle answer selection
 	function handleAnswersSelected(event: any) {
