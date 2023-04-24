@@ -16,4 +16,4 @@
 
 <QuestionText bind:text={question.text} />
 
-<Answers bind:answers={shuffledAnswers} />
+<Answers bind:answers={shuffledAnswers} on:answersSelected />

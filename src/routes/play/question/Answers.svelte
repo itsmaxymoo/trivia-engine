@@ -4,12 +4,12 @@
 	export let answers: Array<String> = [];
 	export let multiSelect: boolean = false;
 	let selectedAnswers: Array<String> = [];
-	let isLoading: boolean = false;
+	let isSent: boolean = false;
 
 	const eventDispatch = createEventDispatcher();
 
 	function toggleAnswer(answer: String) {
-		if (isLoading) {
+		if (isSent) {
 			return;
 		}
 		// If we need to add this element
@@ -28,7 +28,7 @@
 	}
 
 	function sendSelectedAnswers() {
-		isLoading = true;
+		isSent = true;
 		eventDispatch("answersSelected", {
 			answers: selectedAnswers,
 		});
@@ -57,9 +57,10 @@
 <p class="has-text-centered">
 	<button
 		on:click={sendSelectedAnswers}
-		class="button is-link {selectedAnswers.length == 0 || isLoading
+		class="button is-link {selectedAnswers.length == 0 || isSent
 			? 'is-outlined is-static'
-			: ''} {isLoading ? 'is-loading' : ''}"
+			: ''}"
+		disabled={isSent}
 	>
 		{#if selectedAnswers.length == 0}
 			Select an answer...
