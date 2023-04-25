@@ -39,6 +39,7 @@ export class GameManager {
 	}
 
 	public get settings() { return this._settings; }
+	public get questionArray() { return this._questionQueue; }
 
 	public hasNextQuestion(): boolean {
 		return this._questionIndex + 1 < this.settings.totalQuestions;

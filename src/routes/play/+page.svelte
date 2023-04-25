@@ -48,6 +48,8 @@
 		if (gameManager!.hasNextQuestion()) {
 			currentQuestion = gameManager!.getNextQuestion();
 			questionAnswerState = QuestionState.UNANSWERED;
+		} else {
+			goto("/results");
 		}
 	}
 </script>
@@ -63,7 +65,10 @@
 
 	{#if questionAnswerState != QuestionState.UNANSWERED}
 		<p class="has-text-centered">
-			<button class="button is-link is-outline" on:click={nextQuestion}>
+			<button
+				class="button is-link is-outline is-medium"
+				on:click={nextQuestion}
+			>
 				{hasNextQuestion ? "Next question >" : "See results"}
 			</button>
 		</p>
