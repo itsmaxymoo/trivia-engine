@@ -82,7 +82,13 @@ for csv_path in found_csv:
 		csv_reader = csv.DictReader(csv_file, dialect="excel")
 
 		for row in csv_reader:
-			wrong_answers = list(filter(lambda x: x, [row["FalseAnswer" + str(key_index)] for key_index in range(1, 4)]))
+			wrong_answers = []
+
+			for key in row.keys():
+				if(key.startswith("FalseAnswer")):
+					if row[key]:
+						wrong_answers.append(row[key])
+
 			question: Question = Question(row["Question"], row["Answer"], wrong_answers)
 
 			bank.append(question.to_dict())
