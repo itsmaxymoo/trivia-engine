@@ -6,6 +6,10 @@ import json
 
 IN_DIR = "./questions"
 BUILD_DIR = "./static/questions"
+COL_DIFFICULTY = 0
+COL_QUESTION_TEXT = 1
+COL_RESP_START = 2
+RESP_CORRECT_INDICATOR = "[x]"
 
 
 # Ensure we are in the proper directory
@@ -41,30 +45,28 @@ topic_list = {}
 
 class Question:
 	question: str
-	answer: str
-	false_answers = []
+	correct_answers: list
+	false_answers: list
 
-	def __init__(self, question: str, answer: str, wrong_answers: list):
-		self.false_answers = []
-		if len(question) * len(answer) < 1:
-			raise ValueError("question and answer length must be >0")
+	def __init__(self, question: str, correct_answers: list, wrong_answers: list):
+		self.false_answers = wrong_answers
+		self.correct_answers = correct_answers
+		if not question:
+			raise ValueError("question length must be >0")
 		
 		self.question = question
-		self.answer = answer
 
-		if len(wrong_answers) < 1 or len(wrong_answers) > 3:
-			raise ValueError("# of wrong answers must be 1<n<3")
+		if len(wrong_answers) < 1 or len(correct_answers) < 1:
+			raise ValueError("# responses error")
 		
-		for wa in wrong_answers:
-			if len(wa) < 1:
-				raise ValueError("wrong answer length must be >0")
-			
-			self.false_answers.append(wa)
+		for a in zip(self.correct_answers, self.false_answers):
+			if len(a) < 1:
+				raise ValueError("response length must be >0")
 	
 	def to_dict(self):
 		return {
 			"question": self.question,
-			"answer": self.answer,
+			"correct_answers": self.correct_answers,
 			"false_answers": self.false_answers
 		}
 
@@ -79,17 +81,20 @@ for csv_path in found_csv:
 	bank = []
 
 	with open(csv_path, newline='') as csv_file:
-		csv_reader = csv.DictReader(csv_file, dialect="excel")
+		csv_reader = csv.reader(csv_file, dialect="excel")
+		next(csv_reader, None)
 
 		for row in csv_reader:
 			wrong_answers = []
+			correct_answers = []
 
-			for key in row.keys():
-				if(key.startswith("FalseAnswer")):
-					if row[key]:
-						wrong_answers.append(row[key])
+			for i in range(COL_RESP_START, len(row)):
+				if row[i].startswith(RESP_CORRECT_INDICATOR):
+					correct_answers.append(row[i].lstrip(RESP_CORRECT_INDICATOR))
+				elif row[i]:
+					wrong_answers.append(row[i])
 
-			question: Question = Question(row["Question"], row["Answer"], wrong_answers)
+			question: Question = Question(row[COL_QUESTION_TEXT], correct_answers, wrong_answers)
 
 			bank.append(question.to_dict())
 			topic_list[stripped_name] += 1

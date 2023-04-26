@@ -31,7 +31,7 @@
 					qa.forEach((q: { [id: string]: any }) => {
 						categorizedQuestionBank[topic.toString()].push({
 							text: q["question"],
-							answer: q["answer"],
+							correctAnswers: q["correct_answers"],
 							falseAnswers: q["false_answers"],
 						});
 					});

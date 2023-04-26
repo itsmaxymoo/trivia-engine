@@ -1,6 +1,6 @@
 export interface Question {
 	text: string,
-	answer: string,
+	correctAnswers: Array<String>,
 	falseAnswers: Array<String>
 }
 
@@ -58,14 +58,14 @@ export class GameManager {
 	}
 
 	public answerQuestion(selectedAnswers: Array<String>): boolean {
-		if (selectedAnswers[0] == this._questionQueue[this._questionIndex].question.answer) {
-			this._questionQueue[this._questionIndex].state = QuestionState.TRUE;
-			return true;
-		}
-		else {
-			this._questionQueue[this._questionIndex].state = QuestionState.FALSE;
-			return false;
-		}
+		let compA: boolean = selectedAnswers.every((object, index) => this.getQuestion().question.correctAnswers.includes(object));
+		let compB: boolean = this.getQuestion().question.correctAnswers.every((object, index) => selectedAnswers.includes(object));
+
+		let correct: boolean = compA && compB;
+
+		this._questionQueue[this._questionIndex].state = (correct ? QuestionState.TRUE : QuestionState.FALSE);
+
+		return correct;
 	}
 
 	private constructQuestionQueue(categorizedQuestionBank: { [topic: string]: Array<Question> }): Array<QuestionQueueEntry> {

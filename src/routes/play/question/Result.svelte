@@ -4,7 +4,7 @@
 	export let correct: boolean = true;
 	export let question: Question = {
 		text: "NULL",
-		answer: "NULL",
+		correctAnswers: [],
 		falseAnswers: [],
 	};
 </script>
@@ -15,9 +15,13 @@
 	</div>
 	<div class="message-body">
 		{#if correct}
-			Congratulations! The correct answer is indeed {question.answer}.
+			Congratulations! The correct answer is indeed {question.correctAnswers.join(
+				", "
+			)}.
 		{:else}
-			Try again next time! The correct answer is <b>{question.answer}</b>.
+			Try again next time! The correct answer is <b
+				>{question.correctAnswers.join(", ")}</b
+			>.
 		{/if}
 	</div>
 </article>
