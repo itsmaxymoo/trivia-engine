@@ -1,4 +1,4 @@
-Difficulty,Question,Response,Response,Response,Response
+Difficulty,Question,Responses
 1,Question text here. This question has 4 possible answers.,[x]Correct answer,FA 1,False answer 2,
 1,Question 2 text here. This question has 4 possible answers.,[x]Correct answer 2,FA 1,False answer 2,False answer 3
 1,Sample multi-select question. There are 2 correct answers.,[x]CA1,[x]CA2,WrongAns1,WA2
