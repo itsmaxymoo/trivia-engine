@@ -1,9 +1,13 @@
 <script lang="ts">
 	import { questionPath } from "$lib/const";
+	import { createEventDispatcher } from "svelte";
 
 	// For storing topics and selected topics
 	let topicDict: { [id: string]: Number } = {};
 	export let selectedTopics: Array<String> = [];
+
+	// For sending event on topic load
+	const dispatch = createEventDispatcher();
 
 	// Async load topics
 	async function loadTopicsList() {
@@ -11,7 +15,18 @@
 		const resp = await res.text();
 
 		if (res.ok) {
+			let q: number = 0;
+
 			topicDict = JSON.parse(resp);
+
+			Object.keys(topicDict).forEach((key) => {
+				q += topicDict[key] as number; // this is stupid
+			});
+
+			dispatch("topicsLoaded", {
+				numQuestions: q,
+			});
+
 			return true;
 		} else {
 			throw new Error(resp);
