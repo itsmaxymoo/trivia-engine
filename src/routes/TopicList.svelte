@@ -15,17 +15,7 @@
 		const resp = await res.text();
 
 		if (res.ok) {
-			let q: number = 0;
-
 			topicDict = JSON.parse(resp);
-
-			Object.keys(topicDict).forEach((key) => {
-				q += topicDict[key] as number; // this is stupid
-			});
-
-			dispatch("topicsLoaded", {
-				numQuestions: q,
-			});
 
 			return true;
 		} else {
@@ -43,6 +33,20 @@
 			selectedTopics = selectedTopics;
 		} else {
 			selectedTopics = [...selectedTopics, topic];
+		}
+	}
+
+	// Notify user of how many potential questions have been selected
+	$: {
+		selectedTopics;
+		{
+			let sum = 0;
+			selectedTopics.forEach((key) => {
+				sum += topicDict[key as string] as number; // Again, this is stupid
+			});
+			dispatch("maxQuestionsChanged", {
+				numQuestions: sum,
+			});
 		}
 	}
 </script>

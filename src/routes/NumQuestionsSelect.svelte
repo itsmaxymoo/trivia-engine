@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let maxQuestions: number = 0;
+	export let maxQuestions: number;
 	export let selectedValue: number = 0;
 
 	$: {
@@ -9,7 +9,7 @@
 </script>
 
 <p class="has-text-centered">
-	{#if maxQuestions > 0}
+	{#if maxQuestions !== undefined}
 		<span class="select is-medium">
 			<select bind:value={selectedValue}>
 				<option value={maxQuestions}

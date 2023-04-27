@@ -59,7 +59,7 @@
 <StdContainer>
 	<TopicList
 		bind:selectedTopics
-		on:topicsLoaded={(event) => {
+		on:maxQuestionsChanged={(event) => {
 			maxQuestions = event.detail.numQuestions;
 		}}
 	/>
