@@ -19,7 +19,6 @@
 		isLoading = true;
 		let completedRequests: number = 0;
 		let categorizedQuestionBank: { [topic: string]: Array<Question> } = {};
-		let numQuestions: number = 0;
 
 		selectedTopics.forEach((topic) => {
 			let request = fetch(
@@ -27,8 +26,6 @@
 			);
 			request.then((res) =>
 				res.json().then((qa) => {
-					numQuestions += qa.length;
-
 					categorizedQuestionBank[topic.toString()] = [];
 
 					qa.forEach((q: { [id: string]: any }) => {
