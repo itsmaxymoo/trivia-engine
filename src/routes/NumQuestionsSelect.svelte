@@ -1,5 +1,5 @@
 <script lang="ts">
-	export let maxQuestions: number;
+	export let maxQuestions: number = 0;
 	export let selectedValue: number = 0;
 
 	$: {
